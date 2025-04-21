@@ -1,0 +1,78 @@
+package butterdogapp;
+
+import javax.swing.*;
+import java.awt.*;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+
+public class Main {
+    private int icon;
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                new Main().createAndShowGUI();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+        public void createAndShowGUI() throws IOException {
+    // Create JFrame
+        JFrame frame = new JFrame("Butterdog");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000, 1000);
+        frame.setLayout(null); // Allows manual placement of components
+
+        // Load background image
+        Image backgroundImage = ImageIO.read(new File("C:/Users/barel/Downloads/DarkBG.png"));
+
+        // Create JPanel with background
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        panel.setBounds(0, 0, 1000, 1000); // Set size of background panel
+        panel.setLayout(null); // Allow manual placement
+
+        // Load and scale ButterDog Glow image
+        ImageIcon originalIcon = new ImageIcon("ButterDog Glow.png");
+        Image scaledImage = originalIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH); // Resize
+        ImageIcon resizedIcon = new ImageIcon(scaledImage);
+
+        // Create JLabel with resized image
+        JLabel logoLabel = new JLabel(resizedIcon);
+        logoLabel.setBounds(425, 100, 150, 150); // Position logo
+        panel.add(logoLabel); // Add image above the button
+
+        // Create JButton
+        JButton butterDogMain = new JButton("Welcome to ButterDogCo!");
+        butterDogMain.setBounds(400, 300, 200, 50); // Position button below the logo
+        panel.add(butterDogMain); // Add button to the panel
+
+        // Create and add Wikabedia panel
+        Wikabedia wikabediaPanel = new Wikabedia();
+        wikabediaPanel.setBounds(50, 500, 400, 400); // Set position and size
+        panel.add(wikabediaPanel); // Add Wikabedia panel to the main panel
+        
+        
+        ButterApps butterAppsPanel = new ButterApps();
+        butterAppsPanel.setBounds(525, 500, 480, 480);
+        panel.add(butterAppsPanel);
+        
+        panel.revalidate();
+        panel.repaint();
+        // Set the main panel as the content pane
+        frame.setContentPane(panel);
+
+        // Make the frame visible
+        frame.setVisible(true);
+
+
+        
+    }
+}

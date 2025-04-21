@@ -26,7 +26,7 @@ public class Main {
         frame.setLayout(null); // Allows manual placement of components
 
         // Load background image
-        Image backgroundImage = ImageIO.read(new File("C:/Users/barel/Downloads/DarkBG.png"));
+        Image backgroundImage = ImageIO.read(new File("DarkBG.png"));
 
         // Create JPanel with background
         JPanel panel = new JPanel() {

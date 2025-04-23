@@ -19,10 +19,15 @@ public class Main {
     }
 
         public void createAndShowGUI() throws IOException {
+
+        Dimention screenSize = Toolkit.getDefaultToolKit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
     // Create JFrame
         JFrame frame = new JFrame("Butterdog");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 1000);
+        frame.setSize(screenWidth, screenHeight);
         frame.setLayout(null); // Allows manual placement of components
 
         // Load background image
@@ -36,7 +41,7 @@ public class Main {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        panel.setBounds(0, 0, 1000, 1000); // Set size of background panel
+        panel.setBounds(0, 0, screenWidth, screenHeight); // Set size of background panel
         panel.setLayout(null); // Allow manual placement
 
         // Load and scale ButterDog Glow image
@@ -46,30 +51,27 @@ public class Main {
 
         // Create JLabel with resized image
         JLabel logoLabel = new JLabel(resizedIcon);
-        logoLabel.setBounds(425, 100, 150, 150); // Position logo
+        logoLabel.setBounds((screenWidth / 2 ) -75, 100, 150, 150); // Position logo
         panel.add(logoLabel); // Add image above the button
 
         // Create JButton
         JButton butterDogMain = new JButton("Welcome to ButterDogCo!");
-        butterDogMain.setBounds(400, 300, 200, 50); // Position button below the logo
+        butterDogMain.setBounds((screenWidth / 2) - 100, 400, 200, 50); // Position button below the logo
         panel.add(butterDogMain); // Add button to the panel
 
         // Create and add Wikabedia panel
         Wikabedia wikabediaPanel = new Wikabedia();
-        wikabediaPanel.setBounds(50, 500, 400, 400); // Set position and size
+        wikabediaPanel.setBounds(50, screenHeight - 450, 400, 400); // Set position and size
         panel.add(wikabediaPanel); // Add Wikabedia panel to the main panel
         
         
         ButterApps butterAppsPanel = new ButterApps();
-        butterAppsPanel.setBounds(525, 500, 480, 480);
+        butterAppsPanel.setBounds(screenWidth - 530, screenHeight - 500, 480, 480);
         panel.add(butterAppsPanel);
         
-        panel.revalidate();
-        panel.repaint();
-        // Set the main panel as the content pane
+       
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setContentPane(panel);
-
-        // Make the frame visible
         frame.setVisible(true);
 
 

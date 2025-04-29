@@ -19,62 +19,63 @@ public class Main {
     }
 
         public void createAndShowGUI() throws IOException {
-
-        Dimention screenSize = Toolkit.getDefaultToolKit().getScreenSize();
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int screenWidth = screenSize.width;
+    int screenHeight = screenSize.height;
 
     // Create JFrame
-        JFrame frame = new JFrame("Butterdog");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(screenWidth, screenHeight);
-        frame.setLayout(null); // Allows manual placement of components
+    JFrame frame = new JFrame("Butterdog");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(screenWidth, screenHeight);
+    frame.setLayout(null);
 
-        // Load background image
-        Image backgroundImage = ImageIO.read(new File("DarkBG.png"));
+    // Load background image
+    Image backgroundImage = ImageIO.read(new File("C:/Users/barel/Downloads/DarkBG.png"));
 
-        // Create JPanel with background
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-            }
-        };
-        panel.setBounds(0, 0, screenWidth, screenHeight); // Set size of background panel
-        panel.setLayout(null); // Allow manual placement
+    // Create JPanel with background image
+    JPanel panel = new JPanel() {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    };
+    panel.setBounds(0, 0, screenWidth, screenHeight);
+    panel.setLayout(null);
 
-        // Load and scale ButterDog Glow image
-        ImageIcon originalIcon = new ImageIcon("ButterDog Glow.png");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH); // Resize
-        ImageIcon resizedIcon = new ImageIcon(scaledImage);
+    // Load and scale ButterDog Glow image
+    ImageIcon originalIcon = new ImageIcon("ButterDog Glow.png");
+    Image scaledImage = originalIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+    ImageIcon resizedIcon = new ImageIcon(scaledImage);
 
-        // Create JLabel with resized image
-        JLabel logoLabel = new JLabel(resizedIcon);
-        logoLabel.setBounds((screenWidth / 2 ) -75, 100, 150, 150); // Position logo
-        panel.add(logoLabel); // Add image above the button
+    // Add logo
+    JLabel logoLabel = new JLabel(resizedIcon);
+    logoLabel.setBounds((screenWidth / 2) - 75, 100, 150, 150); // centered
+    panel.add(logoLabel);
 
-        // Create JButton
-        JButton butterDogMain = new JButton("Welcome to ButterDogCo!");
-        butterDogMain.setBounds((screenWidth / 2) - 100, 400, 200, 50); // Position button below the logo
-        panel.add(butterDogMain); // Add button to the panel
+    // Add button
+    JButton butterDogMain = new JButton("Welcome to ButterDogCo!");
+    butterDogMain.setBounds((screenWidth / 2) - 100, 300, 200, 50);
+    panel.add(butterDogMain);
 
-        // Create and add Wikabedia panel
-        Wikabedia wikabediaPanel = new Wikabedia();
-        wikabediaPanel.setBounds(50, screenHeight - 450, 400, 400); // Set position and size
-        panel.add(wikabediaPanel); // Add Wikabedia panel to the main panel
-        
-        
-        ButterApps butterAppsPanel = new ButterApps();
-        butterAppsPanel.setBounds(screenWidth - 530, screenHeight - 500, 480, 480);
-        panel.add(butterAppsPanel);
-        
-       
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setContentPane(panel);
-        frame.setVisible(true);
+    // Add Wikabedia panel
+    Wikabedia wikabediaPanel = new Wikabedia();
+    wikabediaPanel.setBounds(50, screenHeight - 450, 400, 400);
+    panel.add(wikabediaPanel);
+
+    // Add ButterApps panel
+    ButterApps butterAppsPanel = new ButterApps();
+    butterAppsPanel.setBounds(screenWidth - 530, screenHeight - 490, 480, 480);
+    panel.add(butterAppsPanel);
+    
+    AppNames appNames = new AppNames();
+    JButton appButton = appNames.getAppNameButton();
+    appButton.setBounds(450, 400, 150, 50);
+    panel.add(appButton);
 
 
-        
-    }
+    frame.setContentPane(panel);
+    frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Optional: full screen
+    frame.setVisible(true);
+}
 }
